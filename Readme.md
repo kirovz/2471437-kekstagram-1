@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Никита Киров](https://up.htmlacademy.ru/javascript-individual/1/user/2471437).
-* Наставник: `Неизвестно`.
+* Наставник: `Aleksey Vasiliev`.
 
 ---
 
