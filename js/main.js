@@ -54,7 +54,8 @@ const similarUserDescription = Array.from({ length: USER_DESCRIPTION_COUNT }, cr
 console.log(similarUserDescription)
 
 //---------------------------------------------------------------------------------------
-  let TYPE =[
+const ADS_DESCRIPTION_COUNT = 10;
+const TYPE =[
     'palace',
     'flat',
     'house',
@@ -96,3 +97,4 @@ let descriptionSimilarADS = function() {
   
   };
 };
+const similarDescriptionADS = Array.from({ length: ADS_DESCRIPTION_COUNT }, descriptionSimilarADS);
