@@ -8,18 +8,36 @@ const NAMES = [
   'Юлия',
   'Люпита',
   'Вашингтон',
+  'Авдей',
+  'Алексей',
+  'Альберт',
+  'Андрей',
+  'Анатолий',
+  'Антон',
+  'Аркадий',
+  'Артур',
+  'Арсений',
+  'Афанасий',
+  'Богдан',
+  'Борис',
+  'Василий',
+  'Виктор',
+  'Владислав',
+  'Владимир',
+  'Вячеслав',
+
 ];
 
-let MESSAGE =
-  ['Всё отлично!'],
-  ['В целом всё неплохо.Но не всё.'],
-  ['Когда вы делаете фотографию, хорошо бы убирать палец из кадра.В конце концов это просто непрофессионально.'],
-  ['Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.'],
-  ['Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.'],
-  ['Лица у людей на фотке перекошены, как будто их избивают.Как можно было поймать такой неудачный момент?!'];
+let MESSAGE = [
+  'Всё отлично!',
+  'В целом всё неплохо.Но не всё.',
+  'Когда вы делаете фотографию, хорошо бы убирать палец из кадра.В конце концов это просто непрофессионально.',
+  'Моя бабушка случайно чихнула с фотоаппаратом в руках и у неё получилась фотография лучше.',
+  'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.',
+  'Лица у людей на фотке перекошены, как будто их избивают.Как можно было поймать такой неудачный момент?!',
+];
 
-
-
+// Генегация случайного целого числа:
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
   const upper = Math.floor(Math.max(a, b));
@@ -27,23 +45,32 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-const getRandomFloat = (a, b) => {
-  const result = Math.random() * (b - a) + a;
-  return result;
+// Генерация ID фото пользователя:
+const createID = () => {
+  let latestID = 0;
+  return {
+    getNewID() {
+      latestID += 1;
+      return latestID;
+    }
+  };
 };
 
+const userPhotoCreateID = createID();
+
+// Логика по поиску случайного элемента в переданном массиве:
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 const createUserDescription = function () {
   return {
-    id: getRandomInteger(),
-    url: `photos/${getRandomInteger(1, 25)}.jpg`,
+    id: getRandomInteger(), // Идентификаторы не должны повторяться.
+    url: `photos/${getRandomInteger(1, 25)}.jpg`, // Идентификаторы не должны повторяться.
     description: `Text${getRandomInteger(1, 25)}.`,
     likes: getRandomInteger(15, 200),
     comments: {
-      id: getRandomInteger(),
+      id: getRandomInteger(), // Идентификаторы не должны повторяться.
       avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-      message: getRandomArrayElement(MESSAGE),
+      message: getRandomArrayElement(MESSAGE), // необходимо взять одно или два случайных предложения из представленных.
       name: getRandomArrayElement(NAMES),
     },
   };
@@ -53,9 +80,9 @@ const similarUserDescription = Array.from({ length: USER_DESCRIPTION_COUNT }, cr
 
 console.log(similarUserDescription)
 
-//---------------------------------------------------------------------------------------
+// Кексобукинг ---------------------------------------------------------------------------------------
 const ADS_DESCRIPTION_COUNT = 10;
-const TYPE =[
+const TYPE = [
     'palace',
     'flat',
     'house',
@@ -67,8 +94,19 @@ const TYPE =[
     'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
     'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg',
   ];
-  const CHECK = ['12:00', '13:00', '14:00'];
-  const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
+  const CHECK = [
+    '12:00', 
+    '13:00', 
+    '14:00',
+  ];
+  const FEATURES = [
+    'wifi', 
+    'dishwasher', 
+    'parking', 
+    'washer', 
+    'elevator', 
+    'conditioner',
+  ];
 
 let descriptionSimilarADS = function() {
   return {
