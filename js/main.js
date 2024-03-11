@@ -47,9 +47,9 @@ const getRandomInteger = (a, b) => {
 
 // Генерация случайного, не повторяющегося числа:
 // Через замыкание
-let generateID = (min, max) {
+let generateID = (min, max) => {
   curr = min;
-  return getGenerateID = () {
+  return getGenerateID = () => {
     if (curr < max) {
       return curr++;
     }
@@ -73,7 +73,7 @@ const createUserDescription = function () {
     description: `Text${descriptionID()}.`,
     likes: getRandomInteger(15, 200),
     comments: {
-      id: commentFotoID()P, // Идентификаторы не должны повторяться.
+      id: commentFotoID(), // Идентификаторы не должны повторяться.
       avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
       message: getRandomArrayElement(MESSAGE), // необходимо взять одно или два случайных предложения из представленных.
       name: getRandomArrayElement(NAMES),
