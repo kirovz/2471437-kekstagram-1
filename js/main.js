@@ -45,41 +45,35 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-// Генерация ID фото пользователя:
-let latestID = 0;
-const createID = function() {
-  latestID += 1;
-  return latestID;
+// Генерация случайного, не повторяющегося числа:
+// Через замыкание
+let generateID = (min, max) {
+  curr = min;
+  return getGenerateID = () {
+    if (curr < max) {
+      return curr++;
+    }
+    return null;
+  };
 };
 
-let urlFotoID = 0;
-const createUrlFotoID = function() {
-  urlFotoID += 1;
-  return urlFotoID;
-};
+let latestID = generateID();
+let urlFotoID = generateID();
+let commentFotoID = generateID();
+let descriptionID = generateID();
 
-let commentFotoID = 0;
-const createCommentFotoID = function() {
-  commentFotoID += 1;
-  return commentFotoID;
-};
-
-let descriptionID = 0;
-const createDescriptionID = function() {
-  descriptionID += 1;
-  return descriptionID;
-};
 // Логика по поиску случайного элемента в переданном массиве:
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
+// Функция для генерации объекта описания юзера:
 const createUserDescription = function () {
   return {
-    id: createID(), // Идентификаторы не должны повторяться.
-    url: `photos/${createUrlFotoID()}.jpg`, // Идентификаторы не должны повторяться.
-    description: `Text${createDescriptionID()}.`,
+    id: generateID(), // Идентификаторы не должны повторяться.
+    url: `photos/${urlFotoID()}.jpg`, // Идентификаторы не должны повторяться.
+    description: `Text${descriptionID()}.`,
     likes: getRandomInteger(15, 200),
     comments: {
-      id: createCommentFotoID(), // Идентификаторы не должны повторяться.
+      id: commentFotoID()P, // Идентификаторы не должны повторяться.
       avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
       message: getRandomArrayElement(MESSAGE), // необходимо взять одно или два случайных предложения из представленных.
       name: getRandomArrayElement(NAMES),
