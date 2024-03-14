@@ -45,22 +45,32 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-// Генерация случайного, не повторяющегося числа:
-// Через замыкание
-let generateID = (min, max) => {
-  curr = min;
-  return getGenerateID = () => {
-    if (curr < max) {
-      return curr++;
-    }
-    return null;
-  };
-};
+// Генерация случайного, не повторяющегося числа из урока:
+function createRandomIdFromRangeGenerator (min, max) {
+  const previousValues = [];
 
-let latestID = generateID();
-let urlFotoID = generateID();
-let commentFotoID = generateID();
-let descriptionID = generateID();
+  return function () {
+    let currentValue = getRandomInteger(min, max);
+    if (previousValues.length >= (max - min + 1)) {
+      // console.error(`Перебраны все числа из диапазона от ${ min } до ${ max}`);
+      return null;
+    }
+    while (previousValues.includes(currentValue)) {
+      currentValue = getRandomInteger(min, max);
+    }
+    previousValues.push(currentValue);
+    return currentValue;
+  };
+}
+
+// Описание генерируемых данных:
+const latestID = createRandomIdFromRangeGenerator();
+const urlFotoID = createRandomIdFromRangeGenerator();
+const commentFotoID = createRandomIdFromRangeGenerator();
+const descriptionID = createRandomIdFromRangeGenerator();
+const likesID = createRandomIdFromRangeGenerator(15, 200);
+const avatarID = createRandomIdFromRangeGenerator(1, 6);
+
 
 // Логика по поиску случайного элемента в переданном массиве:
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
@@ -68,14 +78,14 @@ const getRandomArrayElement = (elements) => elements[getRandomInteger(0, element
 // Функция для генерации объекта описания юзера:
 const createUserDescription = function () {
   return {
-    id: generateID(), // Идентификаторы не должны повторяться.
-    url: `photos/${urlFotoID()}.jpg`, // Идентификаторы не должны повторяться.
+    id: latestID(),
+    url: `photos/${urlFotoID()}.jpg`,
     description: `Text${descriptionID()}.`,
-    likes: getRandomInteger(15, 200),
+    likes: likesID(),
     comments: {
-      id: commentFotoID(), // Идентификаторы не должны повторяться.
-      avatar: `img/avatar-${getRandomInteger(1, 6)}.svg`,
-      message: getRandomArrayElement(MESSAGE), // необходимо взять одно или два случайных предложения из представленных.
+      id: commentFotoID(),
+      avatar: `img/avatar-${avatarID()}.svg`,
+      message: getRandomArrayElement(MESSAGE),
       name: getRandomArrayElement(NAMES),
     },
   };
@@ -83,4 +93,4 @@ const createUserDescription = function () {
 
 const similarUserDescription = Array.from({ length: USER_DESCRIPTION_COUNT }, createUserDescription);
 
-console.log(similarUserDescription);
+// console.log(similarUserDescription);
