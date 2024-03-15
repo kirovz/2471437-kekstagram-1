@@ -47,25 +47,25 @@ const getRandomInteger = (a, b) => {
 
 // Генерация ID фото пользователя:
 let latestID = 0;
-const createID = function() {
+const createID = function () {
   latestID += 1;
   return latestID;
 };
 
 let urlFotoID = 0;
-const createUrlFotoID = function() {
+const createUrlFotoID = function () {
   urlFotoID += 1;
   return urlFotoID;
 };
 
 let commentFotoID = 0;
-const createCommentFotoID = function() {
+const createCommentFotoID = function () {
   commentFotoID += 1;
   return commentFotoID;
 };
 
 let descriptionID = 0;
-const createDescriptionID = function() {
+const createDescriptionID = function () {
   descriptionID += 1;
   return descriptionID;
 };
